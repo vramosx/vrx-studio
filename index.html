@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VRX Studio — Big ideas. Tools to go further.</title>
+<meta name="description" content="VRX Studio is an independent studio building plugins, tools and digital products — from Unity extensions to browser and commerce apps.">
+<meta name="theme-color" content="#06080b">
+<meta property="og:title" content="VRX Studio">
+<meta property="og:description" content="Big ideas. Tools to go further.">
+<meta property="og:image" content="assets/media/side-scroller/img/poster-feature-loop.jpg">
+<link rel="icon" href="assets/brand/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="VRX Studio — home"><img src="assets/brand/vrx-mark.png" alt="" width="53" height="22"><span>VRX <small>STUDIO</small></span></a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="#featured">Featured</a>
+      <a href="#projects">Projects</a>
+      <a href="#studio">Studio</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn header-cta" href="#projects">Explore <span class="arrow" aria-hidden="true">→</span></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO: full-bleed video. Video source comes from the featured project in data/projects.js -->
+  <section class="hero" id="top" aria-label="Intro">
+    <div class="hero-media" data-hero-media>
+      <img src="assets/media/side-scroller/img/poster-hero-loop.jpg" alt="">
+    </div>
+    <div class="wrap hero-inner">
+      <div class="eyebrow hero-fade" style="--d:.15s">Independent studio · Endless possibilities</div>
+      <h1>
+        <span class="line"><span style="--d:.1s">Big ideas.</span></span>
+        <span class="line"><span style="--d:.22s">Tools to</span></span>
+        <span class="line"><span style="--d:.34s" class="grad-text">go further.</span></span>
+      </h1>
+      <p class="hero-lede hero-fade" style="--d:.6s">We build plugins, tools and digital products that connect what you imagine to what you can build. Starting with games — thinking beyond.</p>
+      <div class="hero-actions hero-fade" style="--d:.75s" data-hero-actions>
+        <a class="btn primary" href="#projects">Explore projects <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="hero-foot hero-fade" style="--d:.95s">
+        <div data-now></div>
+        <div class="hero-meta">
+          <button class="video-toggle" type="button" data-video-toggle hidden><span class="ico" aria-hidden="true"></span><span class="lbl">Pause video</span></button>
+          <span class="scroll-cue" aria-hidden="true">Scroll</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-label="Platforms" data-marquee></div>
+
+  <!-- FEATURED PROJECT -->
+  <section class="section" id="featured" aria-labelledby="featured-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="reveal"><span class="eyebrow">01 / Featured projects</span><h2 id="featured-title">Less friction.<br>More creation.</h2></div>
+        <p class="reveal" style="--d:.1s">Tools with a purpose. Meet the first chapters of VRX Studio — one in development, one already live.</p>
+      </div>
+      <div data-featured></div>
+    </div>
+  </section>
+
+  <!-- CATALOG -->
+  <section class="section" id="projects" aria-labelledby="projects-title" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="reveal"><span class="eyebrow">02 / Catalog</span><h2 id="projects-title">An expanding<br>universe.</h2></div>
+        <p class="reveal" style="--d:.1s">Unity plugins and Chrome extensions today. Games, commerce apps and web tools on the horizon.</p>
+      </div>
+      <div class="filters reveal" role="toolbar" aria-label="Filter projects by category" data-filters></div>
+      <div class="grid" data-grid aria-live="polite"></div>
+      <div data-horizon></div>
+    </div>
+  </section>
+
+  <!-- STUDIO -->
+  <section class="section studio" id="studio" aria-labelledby="studio-title">
+    <div class="wrap studio-grid">
+      <div class="studio-logo reveal" aria-hidden="true">
+        <span class="ring"></span><span class="ring r2"></span>
+        <span class="coord c1">VRX / CREATIVE ENGINEERING</span>
+        <span class="coord c2">IDEA → TOOL → POSSIBILITY</span>
+        <img src="assets/brand/vrx-logo-full.png" alt="" width="1000" height="531" loading="lazy">
+      </div>
+      <div class="studio-copy">
+        <span class="eyebrow reveal">03 / The studio</span>
+        <h2 class="reveal" id="studio-title">Creative<br>engineering.</h2>
+        <p class="reveal">VRX Studio is an independent studio that turns ideas into tools. We started where the friction is highest — game development — and we are building a catalog that grows across engines, browsers and commerce platforms.</p>
+        <div class="pillars">
+          <div class="pillar reveal"><span>01</span><div><h4>Built for creators</h4><p>Every product removes a barrier between an idea and a working result.</p></div></div>
+          <div class="pillar reveal"><span>02</span><div><h4>Polish is a feature</h4><p>Clean editors, sensible defaults and the details that make a tool feel finished.</p></div></div>
+          <div class="pillar reveal"><span>03</span><div><h4>Made to expand</h4><p>Unity plugins and Chrome extensions first. Shopify apps and web tools next.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <span class="eyebrow reveal">04 / Contact</span>
+      <h2 class="reveal" id="contact-title">Let's build<br><span class="grad-text">what's next.</span></h2>
+      <p class="reveal">Questions, partnerships or early access to upcoming projects — drop us a line.</p>
+      <div class="reveal"><a class="mail-link" data-mail href="#">hello@vrxstudio.example</a></div>
+      <div class="reveal"><a class="btn primary" data-mail-btn href="#">Get in touch <span class="arrow" aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-footer></footer>
+
+<script src="data/projects.js"></script>
+<script src="js/common.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>

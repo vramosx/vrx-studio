@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Project — VRX Studio</title>
+<meta name="description" content="VRX Studio project page.">
+<meta name="theme-color" content="#06080b">
+<link rel="icon" href="assets/brand/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="VRX Studio — home"><img src="assets/brand/vrx-mark.png" alt="" width="53" height="22"><span>VRX <small>STUDIO</small></span></a>
+    <nav class="nav" id="site-nav" aria-label="Project sections" data-project-nav>
+      <a href="index.html#projects">All projects</a>
+    </nav>
+    <a class="btn header-cta" href="index.html#contact">Contact <span class="arrow" aria-hidden="true">→</span></a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- Template: everything inside #main is rendered by js/project.js from data/projects.js (?slug=...) -->
+<main id="main" data-project>
+  <noscript><div class="notfound"><div><h1>VRX Studio</h1><p>Please enable JavaScript to view this project.</p></div></div></noscript>
+</main>
+
+<footer class="site-footer" data-footer></footer>
+
+<script src="data/projects.js"></script>
+<script src="js/common.js"></script>
+<script src="js/project.js"></script>
+</body>
+</html>
