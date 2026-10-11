@@ -113,13 +113,6 @@
     restartTimer();
   }
 
-  /* ---------- marquee ---------- */
-  var words = D.categories.map(function (c) {
-    var has = D.projects.some(function (p) { return p.category === c.id; });
-    return '<span class="' + (has ? "on" : "") + '">' + esc(c.label) + "</span>";
-  }).join("");
-  $("[data-marquee]").innerHTML = '<div class="marquee-track"><div style="display:flex;gap:56px">' + words + words + '</div><div style="display:flex;gap:56px" aria-hidden="true">' + words + words + "</div></div>";
-
   /* ---------- featured (one cinematic panel per featured project, alternating sides) ---------- */
   $("[data-featured]").innerHTML = featuredList.map(function (fp, i) {
     var cat = U.category(fp.category), m = fp.media || {};
@@ -149,11 +142,10 @@
   });
 
   /* ---------- catalog ---------- */
-  var filtersEl = $("[data-filters]"), gridEl = $("[data-grid]"), horizonEl = $("[data-horizon]");
+  var filtersEl = $("[data-filters]"), gridEl = $("[data-grid]");
   function count(id) { return D.projects.filter(function (p) { return id === "all" || p.category === id; }).length; }
-  // Only categories that actually have projects get a filter tab; the rest go to the "On the horizon" strip.
+  // Only categories that actually have projects get a filter tab; empty categories are never shown.
   var activeCats = D.categories.filter(function (c) { return count(c.id) > 0; });
-  var futureCats = D.categories.filter(function (c) { return count(c.id) === 0; });
   var tabs = [{ id: "all", label: "All" }].concat(activeCats);
   filtersEl.innerHTML = tabs.map(function (c) {
     return '<button class="filter" type="button" data-filter="' + esc(c.id) + '" aria-pressed="false">' + esc(c.label) + "<sup>" + String(count(c.id)).padStart(2, "0") + "</sup></button>";
@@ -197,13 +189,13 @@
   var initial = new URLSearchParams(location.search).get("category");
   render(tabs.some(function (t) { return t.id === initial; }) ? initial : "all");
 
-  /* ---------- on the horizon (categories without projects yet) ---------- */
-  if (futureCats.length) {
-    horizonEl.innerHTML = '<div class="horizon reveal" id="horizon"><div class="horizon-head"><span class="eyebrow">On the horizon</span><p>Next chapters of the catalog. Nothing announced yet.</p></div>' +
-      '<ul class="horizon-list">' + futureCats.map(function (c) {
-        return "<li><b>" + esc(c.code || "") + "</b><span>" + esc(c.label) + "</span><small>" + esc(c.blurb || "") + '</small><span class="status" data-status="concept"><i></i>Coming soon</span></li>';
-      }).join("") + "</ul></div>";
-  } else horizonEl.remove();
+  /* ---------- reviews (every project with reviews in data/projects.js) ---------- */
+  var revEl = $("[data-reviews]");
+  if (revEl) {
+    var rvHtml = U.reviewsBlock(D.projects, { projectLink: true });
+    if (rvHtml) { revEl.innerHTML = rvHtml; U.observeReveals(revEl); }
+    else { var rs = document.getElementById("reviews"); if (rs) rs.remove(); var nl = document.querySelector('.nav a[href="#reviews"]'); if (nl) nl.remove(); }
+  }
 
   /* ---------- contact ---------- */
   var mail = $("[data-mail]");

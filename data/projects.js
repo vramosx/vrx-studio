@@ -24,21 +24,21 @@ window.VRX = {
 
   /*
    * Categories. "id" is referenced by project.category.
-   * Categories without projects are shown as "Coming soon" automatically.
+   * Only categories with at least one project are shown (filter tab, footer).
+   * Empty categories are never listed, so you can add one here before its first project.
    * Order here = order of the filter tabs.
+   * Example: { id: "shopify-apps", label: "Shopify Apps", code: "SHP", blurb: "One short line." }
    */
   categories: [
     { id: "unity-plugins",     label: "Unity Plugins",     code: "UNY", blurb: "Editor tools and gameplay systems for Unity developers." },
-    { id: "games",             label: "Games",             code: "GME", blurb: "Original playable worlds built with our own tools." },
-    { id: "chrome-extensions", label: "Chrome Extensions", code: "CRX", blurb: "Small, sharp utilities that live in your browser." },
-    { id: "shopify-apps",      label: "Shopify Apps",      code: "SHP", blurb: "Apps that help merchants build better storefronts." },
-    { id: "web-apps",          label: "Web Apps",          code: "WEB", blurb: "Focused web tools for creators and teams." }
+    { id: "chrome-extensions", label: "Chrome Extensions", code: "CRX", blurb: "Small, sharp utilities that live in your browser." }
   ],
 
   /*
    * Status values: "in-development" | "beta" | "released" | "concept"
    * Optional per project: statusText (overrides the badge text), icon, cta {title,text},
-   * disclaimer (legal notice on the project page), trademarks (short line for the footer).
+   * disclaimer (legal notice on the project page), reviews {source,url,rating,count,items[]}
+   * (shown on the project page and in the home "What players say" section), trademarks (short line for the footer).
    */
   projects: [
     {
@@ -231,6 +231,26 @@ window.VRX = {
         { label: "Version", value: "1.03" },
         { label: "Status", value: "Available" }
       ],
+
+      /*
+       * REVIEWS — real data from the Chrome Web Store (checked Oct 10, 2026; embedded review data on the
+       * store's /reviews page, confirmed against a screenshot). Never edit texts, names, dates or numbers by hand
+       * except to sync them with the store. rating/count = store aggregate; items = written reviews only
+       * (the store has 4 ratings but only 3 written reviews). text is verbatim; if a review is not in English,
+       * set lang (e.g. "pt-BR"), put the original in "original" and the English translation in "text".
+       */
+      reviews: {
+        source: "Chrome Web Store",
+        url: "https://chromewebstore.google.com/detail/xcg-advanced/ghadhbmalgldhgeidcbgpgbchcamhfco/reviews",
+        rating: 4.8,
+        count: 4,
+        checked: "2026-10-10",
+        items: [
+          { name: "CJ Hauser", stars: 5, date: "2025-05-31", dateLabel: "May 31, 2025", text: "A really useful tool", lang: "en", helpful: "2 of 2" },
+          { name: "ToastyShawn", stars: 4, date: "2024-03-11", dateLabel: "Mar 11, 2024", text: "pretty good ngl", lang: "en", helpful: "4 of 4" },
+          { name: "shalamnderalt", stars: 5, date: "2024-02-24", dateLabel: "Feb 24, 2024", text: "U CAN  LITERLY HAVE STRECH RES ON FORTNITE WITH THIS AND CHANGE EVERYHTINGG ELSE TO PRO SETTINGS", lang: "en", helpful: "7 of 7" }
+        ]
+      },
 
       // Trademark / non-affiliation notice, shown on the project page
       disclaimer: "¹ Xbox Cloud Gaming® is a registered trademark or trademarks of Microsoft Corporation in the U.S.A. and other countries. XCG Advanced is not affiliated with Microsoft Corporation, Xbox, Xbox Cloud Gaming, or any of their brands.",

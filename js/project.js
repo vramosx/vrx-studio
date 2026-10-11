@@ -153,6 +153,15 @@
       r(s) + "</div></section>";
   });
 
+  /* ---------- reviews (project.reviews) ---------- */
+  if (U.hasReviews(p)) {
+    var rvNum = String(sections.filter(function (s) { return renderers[s.type] && s.items && s.items.length; }).length + 1).padStart(2, "0");
+    html += '<section class="section" id="reviews" aria-labelledby="reviews-title"><div class="wrap">' +
+      '<div class="section-head"><div class="reveal"><span class="eyebrow">' + rvNum + ' / Reviews</span><h2 id="reviews-title">What players say.</h2></div>' +
+      '<p class="reveal" style="--d:.1s">Real ratings and reviews from the ' + esc(p.reviews.source) + ".</p></div>" +
+      U.reviewsBlock([p]) + "</div></section>";
+  }
+
   /* ---------- CTA ---------- */
   var links = (p.links || []).map(function (l, i) { return U.linkButton(i === 0 ? l : { label: l.label, url: l.url, todo: l.todo }, "", mailSubject); }).join("");
   var cta = p.cta || {};
@@ -180,6 +189,7 @@
     var label = s.navLabel || (s.id.charAt(0).toUpperCase() + s.id.slice(1).replace(/-/g, " "));
     navHtml += '<a href="#' + esc(s.id) + '">' + esc(label) + "</a>";
   });
+  if (U.hasReviews(p)) navHtml += '<a href="#reviews">Reviews</a>';
   nav.innerHTML = navHtml + '<a href="index.html#projects">All projects</a>';
 
   /* ---------- behaviour ---------- */

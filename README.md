@@ -1,4 +1,4 @@
-# VRX Studio — site (v3)
+# VRX Studio — site (v4)
 
 Site estático (HTML + CSS + JS puro, sem build) da VRX Studio. Todo o conteúdo do site está em **inglês**; esta documentação está em português.
 
@@ -77,7 +77,7 @@ Em `data/projects.js`, adicione um item em `categories`:
 { id: "vscode-extensions", label: "VS Code Extensions", code: "VSC", blurb: "Frase curta sobre a categoria." }
 ```
 
-A ordem da lista é a ordem das abas de filtro. Categorias sem nenhum projeto **não** ganham aba de filtro; aparecem automaticamente na faixa compacta **"On the horizon"** abaixo do catálogo (e como "· soon" no rodapé). Assim que a categoria tiver um projeto, a aba aparece sozinha. Links diretos para uma categoria: `index.html?category=<id>#projects`.
+A ordem da lista é a ordem das abas de filtro. Hoje existem só as categorias com produto real: **Unity Plugins** e **Chrome Extensions**. Categorias sem nenhum projeto **não aparecem em lugar nenhum** (sem aba de filtro, sem rodapé, sem faixa "em breve") — então dá para cadastrar uma categoria antes do primeiro projeto; ela só aparece quando tiver um. Links diretos para uma categoria: `index.html?category=<id>#projects`.
 
 ## Trailer e vídeo do hero
 
@@ -102,9 +102,31 @@ ffmpeg -i clipe.mp4 -vf "fps=30,scale=960:-2" -c:v libx264 -crf 23 -preset slow 
 ffmpeg -ss 0.8 -i saida.mp4 -frames:v 1 -q:v 4 poster-saida.jpg
 ```
 
+## Avaliações (reviews)
+
+Cada projeto pode ter um objeto `reviews` em `data/projects.js`:
+
+```js
+reviews: {
+  source: "Chrome Web Store",
+  url: "https://.../reviews",       // link "Read on Chrome Web Store"
+  rating: 4.8, count: 4,            // nota média e número de avaliações da loja
+  checked: "2026-10-10",            // data em que os dados foram conferidos
+  items: [                          // só avaliações ESCRITAS reais, texto literal
+    { name: "CJ Hauser", stars: 5, date: "2025-05-31", dateLabel: "May 31, 2025", text: "A really useful tool", lang: "en", helpful: "2 of 2" }
+  ]
+}
+```
+
+- A home mostra a seção **"What players say"** com todos os projetos que têm `reviews`; a página do projeto ganha a seção **Reviews** (e o link no menu) automaticamente.
+- Cada card leva o selo do produto (ícone + nome), para ficar claro de qual produto é a avaliação.
+- Avaliação em outro idioma: `lang: "pt-BR"`, `original: "texto original"` e `text` com a tradução em inglês; o card mostra "Translated from Portuguese".
+- **Nunca invente ou edite avaliações.** Atualize só copiando da loja (nota, contagem, nome, data, texto).
+- Dados atuais do XCG Advanced (conferidos em 10/10/2026 na página /reviews da Chrome Web Store): 4,8/5 com 4 avaliações, 3 delas escritas (todas em inglês).
+
 ## XCG Advanced (v3)
 
-- Página: `project.html?slug=xcg-advanced`. Categoria Chrome Extensions (agora com aba de filtro própria; saiu da faixa "On the horizon").
+- Página: `project.html?slug=xcg-advanced`. Categoria Chrome Extensions (com aba de filtro própria).
 - Links reais: Chrome Web Store (botão "Add to Chrome") e YouTube ("Watch on YouTube", link externo — nenhum iframe de terceiros é carregado).
 - Vídeo de origem: o vídeo promo enviado pelo Victor (1:48,7, 1920×1080). Cortes (tempos do vídeo original):
   - `trailer.mp4` — vídeo completo, 720p H.264 CRF 27 + AAC 128k (~15 MB), com som no player.
@@ -116,7 +138,7 @@ ffmpeg -ss 0.8 -i saida.mp4 -frames:v 1 -q:v 4 poster-saida.jpg
   - `ambient.mp4` — 0:39,5–0:47,8, Ambient Light (mantém a legenda do vídeo "Immersive ambient lighting").
   - Stills da galeria em resolução original: 0:14,5, 0:20,5, 0:36,5, 0:44, 1:06, 1:24, 1:35,5.
 - Da Chrome Web Store (baixados por curl): ícone 128 px (`icon.png`) e os 5 screenshots oficiais 1280×800 (2 deles estão na galeria como `store-*.webp`).
-- Atenção: a loja mostra a versão como **1.0.3** e o texto oficial diz **1.03** — o site usa "1.03" como pedido. A loja também mostra nota/avaliações e "Offers in-app purchases"; nada disso foi colocado no site (sem notas, números ou preços).
+- Atenção: a loja mostra a versão como **1.0.3** e o texto oficial diz **1.03** — o site usa "1.03" como pedido. A loja também mostra "Offers in-app purchases"; preços não aparecem no site. A nota e as avaliações reais da loja estão na seção Reviews (v4).
 
 ## Mídia da v2 (origem)
 
@@ -134,7 +156,7 @@ ffmpeg -ss 0.8 -i saida.mp4 -frames:v 1 -q:v 4 poster-saida.jpg
 
 ## Acessibilidade e movimento
 
-- Respeita `prefers-reduced-motion`: sem animações de entrada, sem autoplay de vídeos, marquee parado.
+- Respeita `prefers-reduced-motion`: sem animações de entrada, sem autoplay de vídeos.
 - Vídeos de fundo são mudos, tocam só quando visíveis e o hero tem botão de pausar.
 - Navegação por teclado, link "Skip to content", lightbox com ESC / setas / foco preso.
 - Layout responsivo do celular (390 px) ao desktop largo.

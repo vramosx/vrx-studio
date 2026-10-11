@@ -41,17 +41,50 @@
       return '<a class="' + cls + '" href="' + U.esc(l.url) + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + ">" + U.esc(l.label) + ' <span class="arrow" aria-hidden="true">↗</span></a>';
     }
   };
+  /* ---------- reviews (data: project.reviews in data/projects.js) ---------- */
+  var LANGS = { "pt-BR": "Portuguese", pt: "Portuguese", es: "Spanish", fr: "French", de: "German", it: "Italian" };
+  U.stars = function (v, label) {
+    var pct = Math.max(0, Math.min(100, (v / 5) * 100));
+    return '<span class="stars" role="img" aria-label="' + U.esc(label || (v + " out of 5 stars")) + '"><span class="stars-bg" aria-hidden="true">★★★★★</span><span class="stars-fg" aria-hidden="true" style="width:' + pct + '%">★★★★★</span></span>';
+  };
+  /* Renders an aggregate panel + written review cards for every project in `list` that has reviews. */
+  U.reviewsBlock = function (list, opts) {
+    opts = opts || {};
+    var withReviews = list.filter(function (p) { return p.reviews && (p.reviews.rating || (p.reviews.items || []).length); });
+    if (!withReviews.length) return "";
+    return withReviews.map(function (p) {
+      var r = p.reviews, items = r.items || [];
+      var chip = '<span class="product-chip">' + (p.icon ? '<img src="' + U.esc(p.icon) + '" alt="" width="20" height="20" loading="lazy">' : "") + U.esc(p.title) + "</span>";
+      var agg = r.rating ? '<div class="rv-agg reveal">' + chip +
+        '<div class="rv-score"><b>' + U.esc(r.rating.toFixed(1)) + "</b><span>/5</span></div>" + U.stars(r.rating, r.rating + " out of 5 stars") +
+        "<p>" + U.esc(r.count) + " rating" + (r.count === 1 ? "" : "s") + " on " + U.esc(r.source) + (items.length && items.length !== r.count ? " · " + items.length + " written review" + (items.length === 1 ? "" : "s") : "") + "</p>" +
+        '<a class="link-arrow" href="' + U.esc(r.url) + '" target="_blank" rel="noopener">Read on ' + U.esc(r.source) + ' <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>' +
+        (opts.projectLink ? '<a class="link-arrow" href="' + U.projectUrl(p) + '">View ' + U.esc(p.title) + ' <span aria-hidden="true">→</span></a>' : "") +
+        "</div>" : "";
+      var cards = items.map(function (it, i) {
+        var translated = it.lang && it.lang !== "en";
+        return '<figure class="rv-card reveal" style="--d:' + (i % 3) * 0.08 + 's">' +
+          '<div class="rv-top">' + chip + U.stars(it.stars, it.stars + " out of 5 stars") + "</div>" +
+          '<blockquote lang="en"><p>' + U.esc(it.text) + "</p></blockquote>" +
+          (translated ? '<p class="rv-lang">Translated from ' + U.esc(LANGS[it.lang] || it.lang) + (it.original ? ' · <span lang="' + U.esc(it.lang) + '">“' + U.esc(it.original) + "”</span>" : "") + "</p>" : "") +
+          '<figcaption><b>' + U.esc(it.name) + '</b><span><time datetime="' + U.esc(it.date) + '">' + U.esc(it.dateLabel || it.date) + "</time>" + (it.helpful ? " · " + U.esc(it.helpful) + " found this helpful" : "") + "</span></figcaption></figure>";
+      }).join("");
+      return '<div class="reviews' + (items.length ? "" : " agg-only") + '">' + agg + (items.length ? '<div class="rv-list">' + cards + "</div>" : "") + "</div>";
+    }).join("");
+  };
+  U.hasReviews = function (p) { return !!(p && p.reviews && (p.reviews.rating || (p.reviews.items || []).length)); };
+
   window.VRXU = U;
 
   /* ---------- footer ---------- */
   function renderFooter() {
     var el = document.querySelector("[data-footer]");
     if (!el) return;
-    var cats = D.categories.map(function (c) {
-      var n = D.projects.filter(function (p) { return p.category === c.id; }).length;
-      return n
-        ? "<li><a href=\"index.html?category=" + c.id + "#projects\">" + U.esc(c.label) + "</a></li>"
-        : '<li class="muted">' + U.esc(c.label) + " · soon</li>";
+    // only categories that have at least one project are listed
+    var cats = D.categories.filter(function (c) {
+      return D.projects.some(function (p) { return p.category === c.id; });
+    }).map(function (c) {
+      return "<li><a href=\"index.html?category=" + c.id + "#projects\">" + U.esc(c.label) + "</a></li>";
     }).join("");
     var projects = D.projects.map(function (p) {
       return '<li><a href="' + U.projectUrl(p) + '">' + U.esc(p.title) + "</a></li>";
@@ -65,7 +98,7 @@
       '<div class="wordmark-xl" aria-hidden="true">VRX Studio</div>' +
       '<div class="footer-top">' +
       '<div><a class="brand" href="index.html"><img src="assets/brand/vrx-mark.png" alt="" width="53" height="22"><span>VRX <small>STUDIO</small></span></a>' +
-      '<p class="lede">Independent studio building plugins, tools and digital products. Starting with games — thinking beyond.</p></div>' +
+      '<p class="lede">Independent studio building Unity plugins and Chrome extensions.</p></div>' +
       "<div><h4>Projects</h4><ul>" + projects + "</ul></div>" +
       "<div><h4>Categories</h4><ul>" + cats + "</ul></div>" +
       '<div><h4>Studio</h4><ul><li><a href="index.html#studio">About</a></li><li><a href="' + U.esc(U.mailto("Hello VRX Studio")) + '">' + U.esc(D.studio.email) + "</a></li>" + socialHtml + "</ul></div>" +

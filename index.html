@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>VRX Studio — Big ideas. Tools to go further.</title>
-<meta name="description" content="VRX Studio is an independent studio building plugins, tools and digital products — from Unity extensions to browser and commerce apps.">
+<meta name="description" content="VRX Studio is an independent studio building plugins, tools and digital products — from Unity plugins to Chrome extensions.">
 <meta name="theme-color" content="#06080b">
 <meta property="og:title" content="VRX Studio">
 <meta property="og:description" content="Big ideas. Tools to go further.">
@@ -23,6 +23,7 @@
     <nav class="nav" id="site-nav" aria-label="Main">
       <a href="#featured">Featured</a>
       <a href="#projects">Projects</a>
+      <a href="#reviews">Reviews</a>
       <a href="#studio">Studio</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -44,7 +45,7 @@
         <span class="line"><span style="--d:.22s">Tools to</span></span>
         <span class="line"><span style="--d:.34s" class="grad-text">go further.</span></span>
       </h1>
-      <p class="hero-lede hero-fade" style="--d:.6s">We build plugins, tools and digital products that connect what you imagine to what you can build. Starting with games — thinking beyond.</p>
+      <p class="hero-lede hero-fade" style="--d:.6s">We build plugins, tools and digital products that connect what you imagine to what you can build — for game developers and players.</p>
       <div class="hero-actions hero-fade" style="--d:.75s" data-hero-actions>
         <a class="btn primary" href="#projects">Explore projects <span class="arrow" aria-hidden="true">→</span></a>
       </div>
@@ -57,8 +58,6 @@
       </div>
     </div>
   </section>
-
-  <div class="marquee" aria-label="Platforms" data-marquee></div>
 
   <!-- FEATURED PROJECT -->
   <section class="section" id="featured" aria-labelledby="featured-title">
@@ -75,12 +74,22 @@
   <section class="section" id="projects" aria-labelledby="projects-title" style="padding-top:0">
     <div class="wrap">
       <div class="section-head">
-        <div class="reveal"><span class="eyebrow">02 / Catalog</span><h2 id="projects-title">An expanding<br>universe.</h2></div>
-        <p class="reveal" style="--d:.1s">Unity plugins and Chrome extensions today. Games, commerce apps and web tools on the horizon.</p>
+        <div class="reveal"><span class="eyebrow">02 / Catalog</span><h2 id="projects-title">Tools that<br>ship.</h2></div>
+        <p class="reveal" style="--d:.1s">Unity plugins for game developers and Chrome extensions for players — every product built and polished in-house.</p>
       </div>
       <div class="filters reveal" role="toolbar" aria-label="Filter projects by category" data-filters></div>
       <div class="grid" data-grid aria-live="polite"></div>
-      <div data-horizon></div>
+    </div>
+  </section>
+
+  <!-- REVIEWS: rendered from project.reviews in data/projects.js (real store reviews only) -->
+  <section class="section" id="reviews" aria-labelledby="reviews-title" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="reveal"><span class="eyebrow">03 / Reviews</span><h2 id="reviews-title">What players<br>say.</h2></div>
+        <p class="reveal" style="--d:.1s">Real ratings and reviews from the Chrome Web Store.</p>
+      </div>
+      <div data-reviews></div>
     </div>
   </section>
 
@@ -94,13 +103,13 @@
         <img src="assets/brand/vrx-logo-full.png" alt="" width="1000" height="531" loading="lazy">
       </div>
       <div class="studio-copy">
-        <span class="eyebrow reveal">03 / The studio</span>
+        <span class="eyebrow reveal">04 / The studio</span>
         <h2 class="reveal" id="studio-title">Creative<br>engineering.</h2>
-        <p class="reveal">VRX Studio is an independent studio that turns ideas into tools. We started where the friction is highest — game development — and we are building a catalog that grows across engines, browsers and commerce platforms.</p>
+        <p class="reveal">VRX Studio is an independent studio that turns ideas into tools. We started where the friction is highest — game development — and today our catalog spans Unity plugins and Chrome extensions.</p>
         <div class="pillars">
           <div class="pillar reveal"><span>01</span><div><h4>Built for creators</h4><p>Every product removes a barrier between an idea and a working result.</p></div></div>
           <div class="pillar reveal"><span>02</span><div><h4>Polish is a feature</h4><p>Clean editors, sensible defaults and the details that make a tool feel finished.</p></div></div>
-          <div class="pillar reveal"><span>03</span><div><h4>Made to expand</h4><p>Unity plugins and Chrome extensions first. Shopify apps and web tools next.</p></div></div>
+          <div class="pillar reveal"><span>03</span><div><h4>Made to last</h4><p>Real products, maintained and updated — from the Unity editor to your browser.</p></div></div>
         </div>
       </div>
     </div>
@@ -109,7 +118,7 @@
   <!-- CONTACT -->
   <section class="contact" id="contact" aria-labelledby="contact-title">
     <div class="wrap">
-      <span class="eyebrow reveal">04 / Contact</span>
+      <span class="eyebrow reveal">05 / Contact</span>
       <h2 class="reveal" id="contact-title">Let's build<br><span class="grad-text">what's next.</span></h2>
       <p class="reveal">Questions, partnerships or early access to upcoming projects — drop us a line.</p>
       <div class="reveal"><a class="mail-link" data-mail href="#">hello@vrxstudio.example</a></div>
